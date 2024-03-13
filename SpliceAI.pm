@@ -199,8 +199,9 @@ sub run {
 
     my $ref_allele;
     my $alt_allele;
-
-    my $new_allele_string = $vf->ref_allele_string.'/'.$tva->variation_feature_seq;
+    my $alt_allele_str = $tva->variation_feature_seq;
+    $alt_allele_str =~ s/^\s+|\s+$//g;
+    my $new_allele_string = $vf->ref_allele_string.'/'.$alt_allele_str;
 
     if($vf->ref_allele_string =~ /-/) {
       # convert to vcf format to compare the alt alleles
@@ -217,6 +218,7 @@ sub run {
     else {
       $ref_allele = $vf->ref_allele_string;
       $alt_allele = $tva->variation_feature_seq;
+      $alt_allele =~ s/^\s+|\s+$//g;
     }
 
     my $matches = get_matched_variant_alleles(

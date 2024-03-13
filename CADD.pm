@@ -211,6 +211,7 @@ sub run {
     $start = $bvf->{start};
     $end = $bvf->{end};
     $allele = $bvf->alt_alleles->[$ALT_NUM];
+    $allele =~ s/^\s+|\s+$//g;
     $ref = $bvf->ref_allele_string;
 
     if (($ALT_NUM + 1) == scalar(@{$bvf->alt_alleles})) {
